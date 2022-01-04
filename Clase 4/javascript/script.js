@@ -1,3 +1,5 @@
+let direccion;
+
 function comprarPizza(){
     let precio = 5;
     let exit = true;
@@ -40,7 +42,7 @@ function comprarPizza(){
                 alert("Error porfavor elija un numero del 1 al 6.");
             }
         }else if(tipoDePizza == 3){
-            alert("Precio total a pagar: "+precio.toFixed(2));
+            return precio;
             exit = false;
         }else{
             alert("Error porfavor escribe un numero del 1 al 3.");
@@ -48,4 +50,23 @@ function comprarPizza(){
     }    
 }
 
-document.onload = comprarPizza();
+function propina(porcentaje,total) {
+    return total + total*porcentaje;
+}
+
+function iva(total) {
+    return (total + total*0.0475).toFixed(2);
+}
+
+function entrega() {
+    let domicilio = prompt("Quiere entrega a domicilio? Escribe Si o No");
+
+    if (domicilio=="Si"){
+        return prompt("Escriba su direccion de entrega:");
+    }else {
+        return "Recoger pedido en la pizzeria.";
+    }
+}
+
+direccion = entrega();
+alert("El costo total del pedido es: $" + iva(propina(.10,comprarPizza())) + "\nDireccion de envio: " + direccion);
