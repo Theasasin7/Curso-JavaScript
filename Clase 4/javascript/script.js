@@ -72,7 +72,20 @@ class Usuario {
         this.direccion = direccion;
         this.telefono = telefono;
     }
+
+    modificarDireccion(direccion){
+        this.direccion = direccion;
+    }
+
+    mostrarDatos(){
+        alert("Tu nombre es " + this.nombre + ".\nTu contraseña es " + this.contra + ".\nTu correo es " + this.correo + ".\nTu direccion es " + this.direccion + ".\nTu numero de telefono es " + this.telefono + ".");
+    }
 }
+
+
 const usuarioRegistrado = new Usuario (prompt("Cual es su nombre?"),prompt("Escriba una contraseña:"),prompt("Cual es su correo electronico?"),prompt("Escriba su direccion:"),prompt("Numero de telefono:"));
 
 alert("El costo total del pedido es: $" + iva(propina(.10,comprarPizza())) + "\nDireccion de envio: " + entrega(usuarioRegistrado.direccion));
+usuarioRegistrado.mostrarDatos();
+usuarioRegistrado.modificarDireccion(prompt("Escribe una nueva direccion."));
+usuarioRegistrado.mostrarDatos();
