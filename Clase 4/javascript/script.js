@@ -1,5 +1,3 @@
-let direccion;
-
 function comprarPizza(){
     let precio = 5;
     let exit = true;
@@ -58,15 +56,23 @@ function iva(total) {
     return (total + total*0.0475).toFixed(2);
 }
 
-function entrega() {
-    let domicilio = prompt("Quiere entrega a domicilio? Escribe Si o No");
-
-    if (domicilio=="Si"){
-        return prompt("Escriba su direccion de entrega:");
+function entrega(direccion) {
+    if (direccion.length>0){
+        return "El pedido sera entregado a " + direccion + ".";
     }else {
         return "Recoger pedido en la pizzeria.";
     }
 }
 
-direccion = entrega();
-alert("El costo total del pedido es: $" + iva(propina(.10,comprarPizza())) + "\nDireccion de envio: " + direccion);
+class Usuario {
+    constructor (nombre,contra,correo,direccion,telefono){
+        this.nombre = nombre;
+        this.contra = contra;
+        this.correo = correo;
+        this.direccion = direccion;
+        this.telefono = telefono;
+    }
+}
+const usuarioRegistrado = new Usuario (prompt("Cual es su nombre?"),prompt("Escriba una contraseña:"),prompt("Cual es su correo electronico?"),prompt("Escriba su direccion:"),prompt("Numero de telefono:"));
+
+alert("El costo total del pedido es: $" + iva(propina(.10,comprarPizza())) + "\nDireccion de envio: " + entrega(usuarioRegistrado.direccion));
