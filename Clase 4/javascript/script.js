@@ -48,7 +48,9 @@ function comprarPizza(){
     }    
 }
 
-function propina(porcentaje,total) {
+const porcentaje = [0, 1, 2, 3, 4];
+
+function propina(total,porcentaje) {
     return total + total*porcentaje;
 }
 
@@ -82,10 +84,11 @@ class Usuario {
     }
 }
 
+document.onload = console.log("loading :D");
+
+console.log(porcentaje.join(" - "));
 
 const usuarioRegistrado = new Usuario (prompt("Cual es su nombre?"),prompt("Escriba una contraseña:"),prompt("Cual es su correo electronico?"),prompt("Escriba su direccion:"),prompt("Numero de telefono:"));
 
-alert("El costo total del pedido es: $" + iva(propina(.10,comprarPizza())) + "\nDireccion de envio: " + entrega(usuarioRegistrado.direccion));
-usuarioRegistrado.mostrarDatos();
-usuarioRegistrado.modificarDireccion(prompt("Escribe una nueva direccion."));
+alert("El costo total del pedido es: $" + iva(propina(comprarPizza(),porcentaje.map(x => x / 20)[parseInt(prompt("Escoge cuanto desea donar de propina: \n1 - 0% \n2 - 5% \n3 - 10% \n4 - 15% \n5 - 20%"))-1])) + "\nDireccion de envio: " + entrega(usuarioRegistrado.direccion));
 usuarioRegistrado.mostrarDatos();
