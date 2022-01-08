@@ -1,3 +1,92 @@
+const Ingredientes = [
+    {
+        id: 0,
+        nombre: "Pepperoni",
+        cantidad: 100,
+        precio: 1.99
+    },
+    {
+        id: 1,
+        nombre: "Salchicha Italiana",
+        cantidad:80,
+        precio: 1.99
+    },
+    {
+        id: 2,
+        nombre: "Jamon",
+        cantidad: 150,
+        precio: 1.99
+    },
+    {
+        id: 3,
+        nombre: "Tocino",
+        cantidad: 200,
+        precio: 1.99
+    },
+    {
+        id: 4,
+        nombre: "Pollo",
+        cantidad: 100,
+        precio: 2.99
+    },
+    {
+        id: 5,
+        nombre: "Anchoas",
+        cantidad: 75,
+        precio: 3.99
+    },
+    {
+        id: 6,
+        nombre: "Champiñones",
+        cantidad: 100,
+        precio: 2.99
+    },
+    {
+        id: 7,
+        nombre: "Jalapeños",
+        cantidad: 80,
+        precio: 1.99
+    },
+    {
+        id: 8,
+        nombre: "Espinaca",
+        cantidad: 60,
+        precio: 2.99
+    },
+    {
+        id: 9,
+        nombre: "Cebolla",
+        cantidad: 120,
+        precio: 1.99
+    },
+    {
+        id: 10,
+        nombre: "Aceitunas Negras",
+        cantidad: 150,
+        precio:2.99
+    },
+    {
+        id: 11,
+        nombre: "Pimientos Verdes",
+        cantidad: 200,
+        precio: 1.99
+    }
+];
+
+function ordenarIngredientes(propiedad){
+    if(propiedad=="id"){
+        console.log(Ingredientes.sort((a,b) => a.id - b.id));
+    } else if (propiedad=="nombre"){
+        console.log(Ingredientes.sort((a,b) => (a.nombre < b.nombre) ? -1 : (a.nombre > b.nombre) ? 1 : 0));
+    } else if (propiedad=="cantidad"){
+        console.log(Ingredientes.sort((a,b) => a.cantidad - b.cantidad));
+    }  else if (propiedad=="precio"){
+        console.log(Ingredientes.sort((a,b) => a.precio - b.precio));
+    } else {
+        console.log("Error escribe literalmente: 'id', 'nombre', 'cantidad', 'precio'");
+    }
+}
+
 function comprarPizza(){
     let precio = 5;
     let exit = true;
@@ -90,5 +179,8 @@ console.log(porcentaje.join(" - "));
 
 const usuarioRegistrado = new Usuario (prompt("Cual es su nombre?"),prompt("Escriba una contraseña:"),prompt("Cual es su correo electronico?"),prompt("Escriba su direccion:"),prompt("Numero de telefono:"));
 
+console.log(ordenarIngredientes(prompt("Como desearia ordenar los ingredientes? \nid \nnombre \ncantidad \nprecio")));
+
 alert("El costo total del pedido es: $" + iva(propina(comprarPizza(),porcentaje.map(x => x / 20)[parseInt(prompt("Escoge cuanto desea donar de propina: \n1 - 0% \n2 - 5% \n3 - 10% \n4 - 15% \n5 - 20%"))-1])) + "\nDireccion de envio: " + entrega(usuarioRegistrado.direccion));
 usuarioRegistrado.mostrarDatos();
+
