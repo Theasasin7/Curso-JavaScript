@@ -20,7 +20,7 @@ header {
     text-shadow: black 1px 0 10px;
 }
 
-img {
+.logo {
     width: 5rem;
 }
 
@@ -36,9 +36,27 @@ h2 , h3{
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    padding: 0 1rem;
+    padding: 1rem;
     list-style: inside;
     gap: 1rem;
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid #af7d11;
+}
+
+ul {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+}
+
+li {
+    margin: 10px;
 }
 
 @media (min-width: 375px) {
@@ -50,5 +68,11 @@ h2 , h3{
 @media (min-width: 768px) {
     .menu {
         flex-direction: row;
+    }
+}
+
+@media (min-width: 1024px) {
+    main {
+        height: 75vh;
     }
 }
