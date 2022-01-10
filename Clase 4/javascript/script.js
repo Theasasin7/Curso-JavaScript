@@ -1,3 +1,4 @@
+// Array de objetos
 const Ingredientes = [
     {
         id: 0,
@@ -72,7 +73,7 @@ const Ingredientes = [
         precio: 1.99
     }
 ];
-
+// Funcion de ordenar ingredientes
 function ordenarIngredientes(propiedad){
     if(propiedad=="id"){
         console.log(Ingredientes.sort((a,b) => a.id - b.id));
@@ -86,7 +87,7 @@ function ordenarIngredientes(propiedad){
         console.log("Error escribe literalmente: 'id', 'nombre', 'cantidad', 'precio'");
     }
 }
-
+// Funcion de pedido de pizza
 function comprarPizza(){
     let precio = 5;
     let exit = true;
@@ -136,7 +137,7 @@ function comprarPizza(){
         }
     }    
 }
-
+// Array de porcentaje para propinas
 const porcentaje = [0, 1, 2, 3, 4];
 
 function propina(total,porcentaje) {
@@ -149,12 +150,12 @@ function iva(total) {
 
 function entrega(direccion) {
     if (direccion.length>0){
-        return "El pedido sera entregado a " + direccion + ".";
+        return "El pedido sera entregado a la direccion: " + direccion + ".";
     }else {
         return "Recoger pedido en la pizzeria.";
     }
 }
-
+// Clase de objeto para usuarios
 class Usuario {
     constructor (nombre,contra,correo,direccion,telefono){
         this.nombre = nombre;
@@ -179,8 +180,7 @@ console.log(porcentaje.join(" - "));
 
 const usuarioRegistrado = new Usuario (prompt("Cual es su nombre?"),prompt("Escriba una contraseña:"),prompt("Cual es su correo electronico?"),prompt("Escriba su direccion:"),prompt("Numero de telefono:"));
 
-console.log(ordenarIngredientes(prompt("Como desearia ordenar los ingredientes? \nid \nnombre \ncantidad \nprecio")));
+// console.log(ordenarIngredientes(prompt("Como desearia ordenar los ingredientes? \nid \nnombre \ncantidad \nprecio")));
 
-alert("El costo total del pedido es: $" + iva(propina(comprarPizza(),porcentaje.map(x => x / 20)[parseInt(prompt("Escoge cuanto desea donar de propina: \n1 - 0% \n2 - 5% \n3 - 10% \n4 - 15% \n5 - 20%"))-1])) + "\nDireccion de envio: " + entrega(usuarioRegistrado.direccion));
+alert("El costo total del pedido es: $" + iva(propina(comprarPizza(),porcentaje.map(x => x / 20)[parseInt(prompt("Escoge cuanto desea donar de propina: \n1 - 0% \n2 - 5% \n3 - 10% \n4 - 15% \n5 - 20%"))-1])) + "\n" + entrega(usuarioRegistrado.direccion));
 usuarioRegistrado.mostrarDatos();
-
