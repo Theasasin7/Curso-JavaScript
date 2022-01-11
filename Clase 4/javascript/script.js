@@ -1,4 +1,4 @@
-// Array de objetos
+//------------------------------------------------------------------------Array de objetos------------------------------------------
 const Ingredientes = [
     {
         id: 0,
@@ -73,7 +73,7 @@ const Ingredientes = [
         precio: 1.99
     }
 ];
-// Funcion de ordenar ingredientes
+//-----------------------------------------------------------------Funcion de ordenar ingredientes----------------------------------------
 function ordenarIngredientes(propiedad){
     if(propiedad=="id"){
         console.log(Ingredientes.sort((a,b) => a.id - b.id));
@@ -87,7 +87,7 @@ function ordenarIngredientes(propiedad){
         console.log("Error escribe literalmente: 'id', 'nombre', 'cantidad', 'precio'");
     }
 }
-// Funcion de pedido de pizza
+//------------------------------------------------------------------Funcion de pedido de pizza-----------------------------------------------
 function comprarPizza(){
     let precio = 5;
     let exit = true;
@@ -137,7 +137,7 @@ function comprarPizza(){
         }
     }    
 }
-// Array de porcentaje para propinas
+//---------------------------------------------------------------Array de porcentaje para propinas----------------------------------------------
 const porcentaje = [0, 1, 2, 3, 4];
 
 function propina(total,porcentaje) {
@@ -155,7 +155,7 @@ function entrega(direccion) {
         return "Recoger pedido en la pizzeria.";
     }
 }
-// Clase de objeto para usuarios
+//---------------------------------------------------------------Clase de objeto para usuarios-------------------------------------------------
 class Usuario {
     constructor (nombre,contra,correo,direccion,telefono){
         this.nombre = nombre;
