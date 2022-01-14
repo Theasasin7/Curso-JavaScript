@@ -74,23 +74,21 @@ const Ingredientes = [
 ];
 
 const listaCarnes = document.getElementById ("carnes");
-
-Ingredientes.forEach((carne) => {
-
-    let listaC = document.createElement("li");
-    if (carnes.id>=5)
-
-    listaC.innerHTML = `${carne.nombre} - ${carne.precio}`;
-
-listaCarnes.appendChild(listaC);
-});
-
 const listaVegetales = document.getElementById ("vegetales");
 
-Vegetales.forEach((vegetal) => {
+const carnes = Ingredientes.filter(ingrediente => ingrediente.id <=5);
+
+carnes.forEach((carne) => {
+    let listaC = document.createElement("li");
+    listaC.innerHTML = `${carne.nombre} - ${carne.precio}`;
+    listaCarnes.appendChild(listaC);
+});
+
+const vegetales = Ingredientes.filter(ingrediente => ingrediente.id >= 6);
+
+
+vegetales.forEach((vegetal) => {
     let listaV = document.createElement("li");
-
     listaV.innerHTML = `${vegetal.nombre} - ${vegetal.precio}`;
-
-listaVegetales.appendChild(listaV);
+    listaVegetales.appendChild(listaV);
 });
