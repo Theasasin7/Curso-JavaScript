@@ -1,9 +1,10 @@
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Pizzeria del Barrio</title>
+        <title>Document</title>
         <link rel="stylesheet" href="CSS/style.css">
     </head>
     <body>
@@ -14,30 +15,17 @@
         </header>
 
         <main>
-            <div class="carrito">
-                <h2>Crea tu propia Pizza!</h2>
-            </div>
-
-            <section id="pagar" class="centro">
-                <div><button id="boton">Pagar</button></div>
-                <p class="linea">Pizza de queso - $5.00</p>
-            </section>
-
-            <div class="menu">
-                <div>
-                    <h3>Pizzas de carne</h3>
-
-                    <h4>Tipos de carnes</h4>
-                    <ol id="carnes"></ol>
-                </div>
-
-                <div>
-                    <h3>Pizzas vegetarianas</h3>
-
-                    <h4>Tipos de vegetales</h4>
-                    <ol id="vegetales"></ol>
-                </div>
-            </div>
+            <form id="completarData">
+                <fieldset>
+                    <legend>Registrate</legend>
+                    <input type="text" name="nombre" placeholder="Cual es su nombre?" required/>
+                    <input type="email" name="correoElectronico" placeholder="Ingrese su correo electronico:" required/>
+                    <input type="password" name="contrasena" placeholder="Ingrese su contraseña:" required/>                
+                    <input type="text" name="direccion" placeholder="Cual es tu direccion?" required/>
+                    <input type="tel" name="telefono" placeholder="Escribe tu numero telefonico:" required/>
+                    <button class="botonFormulario" type="submit">Submit</button>
+                </fieldset>
+            </form>               
         </main>
 
         <footer>
@@ -51,6 +39,6 @@
                 </li>
             </ul>
         </footer>
-        <script src="javascript/script.js"></script>
+        <script src="javascript/usuarios.js"></script>
     </body>
 </html>

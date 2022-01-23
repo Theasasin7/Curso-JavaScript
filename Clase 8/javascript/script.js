@@ -73,6 +73,25 @@ const Ingredientes = [
     }
 ];
 
+const porcentaje = [.10,.15,.20,.25,.30];
+
+function propina(total,porcentaje) {
+    return total + total*porcentaje;
+}
+
+function iva(total) {
+    return (total + total*0.0475).toFixed(2);
+}
+
+carritoDeCompras=[{id: 12,nombre: "Queso",cantidad: true, precio: 5.00}];
+
+function agregarIngrediente(pizza){
+    let orden = document.createElement("p");
+    orden.innerHTML = `${pizza.nombre} - $${pizza.precio}`;
+    document.getElementById("pagar").appendChild(orden);
+    carritoDeCompras.push(pizza);
+}
+
 const listaCarnes = document.getElementById ("carnes");
 const listaVegetales = document.getElementById ("vegetales");
 
@@ -80,8 +99,11 @@ const carnes = Ingredientes.filter(ingrediente => ingrediente.id <=5);
 
 carnes.forEach((carne) => {
     let listaC = document.createElement("li");
-    listaC.innerHTML = `${carne.nombre} - ${carne.precio}`;
+    listaC.innerHTML = `${carne.nombre} - $${carne.precio} <button id="${carne.nombre}">Agregar</button>`;
     listaCarnes.appendChild(listaC);
+    document.getElementById(carne.nombre).addEventListener("click",() => {
+        agregarIngrediente(carne);
+    });
 });
 
 const vegetales = Ingredientes.filter(ingrediente => ingrediente.id >= 6);
@@ -89,6 +111,17 @@ const vegetales = Ingredientes.filter(ingrediente => ingrediente.id >= 6);
 
 vegetales.forEach((vegetal) => {
     let listaV = document.createElement("li");
-    listaV.innerHTML = `${vegetal.nombre} - ${vegetal.precio}`;
+    listaV.innerHTML = `${vegetal.nombre} - $${vegetal.precio} <button id="${vegetal.nombre}">Agregar</button>`;
     listaVegetales.appendChild(listaV);
+    document.getElementById(vegetal.nombre).addEventListener("click",() => {
+        agregarIngrediente(vegetal);
+    });
+});
+
+document.getElementById("boton").addEventListener("click", () => {
+    let pagoTotal = 0;
+    carritoDeCompras.forEach((pizza) => {
+        pagoTotal+=pizza.precio;
+    });
+    console.log(propina(pagoTotal,.5));
 });

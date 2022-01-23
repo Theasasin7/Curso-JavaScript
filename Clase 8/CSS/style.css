@@ -1,0 +1,177 @@
+
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+    background: #820300;
+    color: #deb887;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1rem;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    background: #af7d11;
+    text-shadow: black 1px 0 10px;
+}
+
+a {
+    color: #deb887;
+    font-size: 1.25rem;
+}
+
+.logo {
+    width: 5rem;
+}
+
+h1 , h2, p{
+    text-align: center;
+}
+
+h2 , h3{
+    padding: 1rem 0;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 1rem;
+    list-style: inside;
+    gap: 1rem;
+}
+
+.carrito {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom: 1px solid #deb887;
+}
+
+button{
+    background-color: #af7d11;
+    color: #820300;
+    padding: .02rem .05rem;
+    border-radius: 0.75rem;
+    border-style: groove;
+    border-color: #deb887;
+    border-width: 3px;
+    font-size: .7rem;
+    font-weight: 550;
+}
+
+.centro {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+}
+
+.linea {
+    border-bottom: 1px solid #deb887;
+}
+
+#boton {
+    background-color: #af7d11;
+    color: #820300;
+    padding: .25rem 1rem;
+    border-radius: 0.75rem;
+    border-style: groove;
+    border-color: #deb887;
+    border-width: 3px;
+    font-size: 1.5rem;
+    font-weight: 550;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10rem;
+}
+
+fieldset {
+    display: flex;
+    flex-direction: column;
+    width: 20rem;
+    gap: .5rem;
+    border-color: #af7d11;
+    border-style: groove;
+    border-width: 3px;
+}
+
+legend {
+    padding: 3px 6px;
+    margin-left: 5rem;
+}
+
+input {
+    background-color: #af7d11;
+    border-style: groove;
+    border-color: #deb887;
+    margin: .5rem;
+    padding: .15rem .5rem;
+}
+
+.botonFormulario {
+    background-color: #af7d11;
+    color: #820300;
+    margin: .5rem;
+    border-radius: 0.75rem;
+    border-style: groove;
+    border-color: #deb887;
+    border-width: 3px;
+    font-size: 1.25rem;
+    font-weight: 550;
+}
+
+::placeholder {
+    color: #820300;
+    font-size: medium;
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+    border-top: 1px solid #af7d11;
+    position: static;
+    bottom:0;
+    width:100%;
+}
+
+ul {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+}
+
+li {
+    margin: 10px;
+}
+
+@media (min-width: 375px) {
+    .menu {
+        align-items: center;
+    }
+}
+
+@media (min-width: 768px) {
+    .menu {
+        flex-direction: row;
+    }
+}
+
+@media (min-width: 1024px) {
+    main {
+        height: 75vh;
+        font-size: 1.5rem;
+    }
+}
