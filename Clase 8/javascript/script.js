@@ -1,3 +1,5 @@
+//-------------------------------------------------------------Array de Objetos Ingredientes--------------------------------------------------
+
 const Ingredientes = [
     {
         id: 0,
@@ -72,7 +74,7 @@ const Ingredientes = [
         precio: 1.99
     }
 ];
-
+//---------------------------------------------Array de porcentajes y sus funciones para sumarlas al total------------------------------------
 const porcentaje = [.10,.15,.20,.25,.30];
 
 function propina(total,porcentaje) {
@@ -83,14 +85,78 @@ function iva(total) {
     return (total + total*0.0475).toFixed(2);
 }
 
-carritoDeCompras=[{id: 12,nombre: "Queso",cantidad: true, precio: 5.00}];
+//-------------------------------------------------------------Array de objeto del carrito de compras-------------------------------------
+
+carritoDeCompras = [];
+
+//------------------------------------------------------------------Clase de el Objeto Comprar-----------------------------------------
+
+class Comprar{
+    constructor(id,nombre,cantidad,precio){
+        this.id = id;
+        this.nombre = nombre;
+        this.cantidad = cantidad;
+        this.precio = precio;
+    }
+}
+//--------------------------------------------------Funciones de agregar y eleiminar Ingredientes al carrito de compras y Local Storage--------------------------- 
 
 function agregarIngrediente(pizza){
     let orden = document.createElement("p");
-    orden.innerHTML = `${pizza.nombre} - $${pizza.precio}`;
+    orden.setAttribute ("id","eliminar"+pizza.id);
+    orden.innerHTML = `${pizza.nombre} - $${pizza.precio} <strong id="eliminarAlmacen${pizza.id}">X</strong>`;
     document.getElementById("pagar").appendChild(orden);
-    carritoDeCompras.push(pizza);
+    agregarCompraAlmacenLocal(pizza.id);
+    document.getElementById("eliminarAlmacen"+pizza.id).addEventListener("click",()=>{
+        document.getElementById("eliminar"+pizza.id).remove();
+        eliminarIngredienteAlmacenLocal(pizza.id);
+    });
 }
+
+function agregarIngredienteAlmacenLocal() {
+    const almacenLocalCarritoCompra = JSON.parse(localStorage.getItem('carritoDeCompra'));
+    if(almacenLocalCarritoCompra != null){
+        almacenLocalCarritoCompra.forEach(comprar => {
+            let orden = document.createElement("p");
+            orden.setAttribute ("id","eliminar"+comprar.id);
+    orden.innerHTML = `${comprar.nombre} - $${comprar.precio} <strong id="eliminarAlmacen${comprar.id}">X</strong>`;
+    document.getElementById("pagar").appendChild(orden);
+        });
+        eliminarIngredienteCarrito();
+    }
+}
+
+function eliminarIngredienteCarrito() {
+    JSON.parse(localStorage.getItem('carritoDeCompra')).forEach(comprar =>{
+        document.getElementById("eliminarAlmacen"+comprar.id).addEventListener("click",()=>{
+            document.getElementById("eliminar"+comprar.id).remove();
+            eliminarIngredienteAlmacenLocal(comprar.id);
+        });
+    })
+}
+
+function eliminarIngredienteAlmacenLocal(id) {
+    carritoDeCompras.splice(carritoDeCompras.findIndex(el => el.id == id),1);
+    localStorage.setItem("carritoDeCompra", JSON.stringify(carritoDeCompras));
+}
+
+agregarIngredienteAlmacenLocal();
+
+function agregarCompraAlmacenLocal(posicion){
+    carritoDeCompras.push(new Comprar(carritoDeCompras.length,Ingredientes[posicion].nombre,Ingredientes[posicion].cantidad,Ingredientes[posicion].precio));
+    localStorage.setItem("carritoDeCompra", JSON.stringify(carritoDeCompras));
+}
+
+function carritoDeCompraAlmacenLocal(){
+    const almacenLocalCarritoCompra = JSON.parse(localStorage.getItem('carritoDeCompra'));
+    if(almacenLocalCarritoCompra != null){
+        almacenLocalCarritoCompra.forEach(comprar => {
+            carritoDeCompras.push(comprar);
+        });
+    }
+}
+carritoDeCompraAlmacenLocal();
+//------------------------------------------------------DOM de array de objetos para separarlas en 2 listas----------------------------------
 
 const listaCarnes = document.getElementById ("carnes");
 const listaVegetales = document.getElementById ("vegetales");
@@ -117,6 +183,8 @@ vegetales.forEach((vegetal) => {
         agregarIngrediente(vegetal);
     });
 });
+
+//------------------------------------------------------------------Evento del boton para pagar---------------------------------------------
 
 document.getElementById("boton").addEventListener("click", () => {
     let pagoTotal = 0;
