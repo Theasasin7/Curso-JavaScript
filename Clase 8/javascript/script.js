@@ -99,7 +99,7 @@ class Comprar{
         this.precio = precio;
     }
 }
-//--------------------------------------------------Funciones de agregar y eleiminar Ingredientes al carrito de compras y Local Storage--------------------------- 
+//----------------------------------------Funciones de agregar y eliminar Ingredientes al carrito de compras y Local Storage--------------------------- 
 
 function agregarIngrediente(pizza){
     let orden = document.createElement("p");
@@ -111,18 +111,40 @@ function agregarIngrediente(pizza){
         document.getElementById("eliminar"+pizza.id).remove();
         eliminarIngredienteAlmacenLocal(pizza.id);
     });
+    repintarRestaTotal();
 }
 
+
 function agregarIngredienteAlmacenLocal() {
-    const almacenLocalCarritoCompra = JSON.parse(localStorage.getItem('carritoDeCompra'));
-    if(almacenLocalCarritoCompra != null){
-        almacenLocalCarritoCompra.forEach(comprar => {
+    if(JSON.parse(localStorage.getItem('carritoDeCompra')) != null){
+        JSON.parse(localStorage.getItem('carritoDeCompra')).forEach(comprar => {
             let orden = document.createElement("p");
             orden.setAttribute ("id","eliminar"+comprar.id);
     orden.innerHTML = `${comprar.nombre} - $${comprar.precio} <strong id="eliminarAlmacen${comprar.id}">X</strong>`;
     document.getElementById("pagar").appendChild(orden);
         });
         eliminarIngredienteCarrito();
+    }
+}
+
+function repintarRestaTotal(){
+    const almacenLocalCarritoCompra = document.getElementById("pagar");
+    let total = 5;
+    if(JSON.parse(localStorage.getItem('carritoDeCompra')) != null){
+        JSON.parse(localStorage.getItem('carritoDeCompra')).forEach(comprar => {
+            total+=parseFloat(comprar.precio);
+            if (document.getElementById("precioTotal") !=null || total == 0) {
+                document.getElementById("precioTotal").remove();
+            }
+        });
+        if (total > 5) {
+            let precioTotal = document.createElement("div");
+            precioTotal.innerHTML = `<p>total: $${total.toFixed(2)}</p>`;
+            precioTotal.setAttribute("id","precioTotal");
+            almacenLocalCarritoCompra.appendChild(precioTotal);
+        }else {
+            document.getElementById("precioTotal").remove();
+        }
     }
 }
 
@@ -138,6 +160,9 @@ function eliminarIngredienteCarrito() {
 function eliminarIngredienteAlmacenLocal(id) {
     carritoDeCompras.splice(carritoDeCompras.findIndex(el => el.id == id),1);
     localStorage.setItem("carritoDeCompra", JSON.stringify(carritoDeCompras));
+    try {
+        repintarRestaTotal();
+    }catch{}
 }
 
 agregarIngredienteAlmacenLocal();
@@ -153,6 +178,11 @@ function carritoDeCompraAlmacenLocal(){
         almacenLocalCarritoCompra.forEach(comprar => {
             carritoDeCompras.push(comprar);
         });
+        try {
+            repintarRestaTotal();
+        } catch (error) {
+            
+        }
     }
 }
 carritoDeCompraAlmacenLocal();
