@@ -1,66 +1,45 @@
-//--------------------------------------------------------------Clase Usuario con su constructor-------------------------------------------
-class Usuario {
-    constructor (nombre,correo,contra,direccion,telefono){
-        this.nombre = nombre;
-        this.correo = correo;
-        this.contra = contra;
-        this.direccion = direccion;
-        this.telefono = telefono;
-    }
-}
-
-//-----------------------------------------------------------------Array de objetos cuentas------------------------------------------------
-
-const cuentas = [
-    {
-        nombre: "admin",
-        correo: "admin@admin.com",
-        contra: "admin",
-        direccion: "direccion",
-        telefono: "0123456789"
-    }
-];
-
-//--------------------------------------------------------------Evento de obtencion de datos de usuarios registrados----------------------------
-
-document.getElementById("completarData").addEventListener("submit",(e) => {
+//-----------------------------
+$("#completarData").submit((e) => {
     e.preventDefault();
-    const datosObtenidos = document.getElementById("completarData");
-    registrarCuenta(datosObtenidos.children[0].children[1].value,datosObtenidos.children[0].children[2].value,datosObtenidos.children[0].children[3].value,datosObtenidos.children[0].children[4].value,datosObtenidos.children[0].children[5].value);
-    datosObtenidos.children[0].children[1].value = "";
-    datosObtenidos.children[0].children[2].value = "";
-    datosObtenidos.children[0].children[3].value = "";
-    datosObtenidos.children[0].children[4].value = "";
-    datosObtenidos.children[0].children[5].value = "";
-    let registroExitoso = document.createElement("p");
-    registroExitoso.innerHTML = "Te haz registrado correctamente."
-    datosObtenidos.appendChild(registroExitoso);
-});
-
-
-//--------------------------------------Funcion para registrar un usuario hace push al array cuentas y array almacenlocal------------------------
-function registrarCuenta(nombre,correo,contra,direccion,telefono){
-    cuentas.push(new Usuario(nombre,correo,contra,direccion,telefono));    
-    actualizarCuentaAlmacenLocal(cuentas);
-}
-
-
-//------------------------------------Funcion para agregar al localstorage los elementos del array cuentas------------------------------------
-function actualizarCuentaAlmacenLocal(cuentas){
-    localStorage.setItem("cuentas", JSON.stringify(cuentas));
-}
-
-//funcion para agregar al array cuentas del local storage el contenido
-function actualizarArrayCuentas(){
-    const cuentasAlmacenLocal = JSON.parse(localStorage.getItem('cuentas'));
-    if(cuentasAlmacenLocal != null){
-        cuentasAlmacenLocal.forEach(cuenta =>{
-            if(cuenta.nombre != "admin"){
-                cuentas.push(cuenta);
-            }
+    let loading = false;
+    if (!loading) {
+        loading = true;
+        const data = $("#completarData");
+        nombre = data[0].firstElementChild.children[1].value;
+        correo = data[0].firstElementChild.children[2].value;
+        contra = data[0].firstElementChild.children[3].value;
+        direccion = data[0].firstElementChild.children[4].value;
+        telefono = data[0].firstElementChild.children[5].value;
+        $("main").prepend(
+            '<div style="width: 100%"><p style="display: none" id="p-user">Registro realizado!</p><img class="centralizado" id="img-user" src="https://acegif.com/wp-content/uploads/2021/01/bienvnds-m.gif"/></div>'
+        );
+        $.ajax({
+            method: "POST",
+            url: "http://localhost:5500/registro",
+            data: {
+                nombre,
+                correo,
+                contra,
+                direccion,
+                telefono,
+            },
+            success: function (response) {
+                if (response === "ok") {
+                    $("#p-user").fadeIn("slow", function () {
+                        $("#p-user").fadeOut(1700);
+                    });
+                    $("#img-user").fadeOut("slow", function () {
+                        $("#img-user").show();
+                        $("#img-user").fadeOut(2700);
+                    });
+                    $("#p-user").remove;
+                    $("#img-user").remove;
+                    loading = false;
+                }
+            },
         });
+        for (let i = 0; i < data[0].firstElementChild.children.length - 1; i++) {
+            data[0].firstElementChild.children[i].value = "";
+        }
     }
-}
-
-
-actualizarArrayCuentas();
+});

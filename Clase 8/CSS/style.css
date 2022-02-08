@@ -31,7 +31,7 @@ a {
     width: 5rem;
 }
 
-h1 , h2, p{
+h1 , h2, p {
     text-align: center;
 }
 
@@ -173,5 +173,10 @@ li {
     main {
         height: 75vh;
         font-size: 1.5rem;
+    }
+    .centralizado {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
